@@ -17,8 +17,8 @@ Inherit the following classes and override their properties.
 ```csharp
 public abstract class RemoveOnBuild
 {
-        protected virtual bool RemoveInEditorApplication { get; } = false;
-        protected virtual bool IgnoreDevelopmentBuild    { get; } = false;
+    protected virtual bool RemoveInEditorApplication { get; } = false;
+    protected virtual bool IgnoreDevelopmentBuild    { get; } = false;
 }
 
 public abstract class RemoveComponentsOnBuild<T> : RemoveOnBuild
