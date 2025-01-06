@@ -1,6 +1,6 @@
 using RemoveOnBuilds;
 
-public class RemoveDebugTagObjectsOnBuild : RemoveTaggedObjectOnBuild
+public class RemoveDebugTaggedObjectsOnBuild : RemoveTaggedObjectsOnBuild
 {
     protected override string Tag                       => "Debug";
     protected override bool   RemoveInEditorApplication => true;

@@ -10,7 +10,7 @@ namespace RemoveOnBuilds
     // Consider using the default 'EditorOnly' tag.
     // CAUTION:
     // Need abstract.
-    public abstract class RemoveTaggedObjectOnBuild : RemoveOnBuild
+    public abstract class RemoveTaggedObjectsOnBuild : RemoveOnBuild
     {
         #region Property
 

@@ -1,0 +1,18 @@
+{
+    "name"       : "com.xjine.remove_on_builds",
+    "displayName": "Remove On Builds", 
+    "version"    : "1.0.0",
+    "unity"      : "2022.3",
+    "description": "Remove some components or objects when building the scene.",
+    "author"     :
+    {
+        "name": "XJINE",
+        "url" : "https://github.com/XJINE"
+    },
+    "keywords":
+    [
+    ],
+    "dependencies":
+    {
+    }
+}

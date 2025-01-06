@@ -8,9 +8,9 @@ namespace RemoveOnBuilds
 {
     // CAUTION:
     // Need abstract.
-    public abstract class RemoveComponentOnBuild<T> : RemoveOnBuild where T : Component
+    public abstract class RemoveComponentsOnBuild<T> : RemoveOnBuild where T : Component
     {
-        protected virtual bool RemoveComponentParentObject { get; } = false;
+        protected virtual bool RemoveParentObject { get; } = false;
 
         protected override void RemoveTargets(Scene scene)
         {
@@ -30,7 +30,7 @@ namespace RemoveOnBuilds
                         continue;
                     }
         
-                    if (RemoveComponentParentObject)
+                    if (RemoveParentObject)
                     {
                         removeObjects.Add(childGameObject);
                     }

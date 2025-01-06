@@ -1,6 +1,6 @@
 using RemoveOnBuilds;
 
-public class RemoveDebugComponentObjectsOnBuild : RemoveComponentOnBuild<Debug>
+public class RemoveDebugComponentsOnBuild : RemoveComponentsOnBuild<Debug>
 {
-    protected override bool RemoveComponentParentObject => true;
+    protected override bool RemoveParentObject => true;
 }
