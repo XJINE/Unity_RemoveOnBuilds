@@ -9,7 +9,7 @@ namespace RemoveOnBuilds
     // NOTE:
     // Consider using the default 'EditorOnly' tag.
     // CAUTION:
-    // Need abstract.
+    // Marked as abstract to prevent this class from being called during the build process.
     public abstract class RemoveTaggedObjectsOnBuild : RemoveOnBuild
     {
         #region Property
@@ -25,7 +25,7 @@ namespace RemoveOnBuilds
                 return;
             }
 
-            var rootObjects = scene.GetRootGameObjects();
+            var rootObjects   = scene.GetRootGameObjects();
             var removeObjects = new List<GameObject>();
 
             foreach (var rootObject in rootObjects)

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,48 +8,55 @@ using UnityEngine.SceneManagement;
 namespace RemoveOnBuilds
 {
     // CAUTION:
-    // Need abstract.
+    // Marked as abstract to prevent this class from being called during the build process.
     public abstract class RemoveComponentsOnBuild<T> : RemoveOnBuild where T : Component
     {
-        protected virtual bool RemoveParentObject { get; } = false;
+        protected virtual bool RemoveEmptyParentObject { get; } = true;
 
         protected override void RemoveTargets(Scene scene)
         {
             var rootObjects      = scene.GetRootGameObjects();
-            var removeComponents = new List<T>();
+            var removeComponents = new List<Component>();
             var removeObjects    = new List<GameObject>();
         
             foreach (var rootObject in rootObjects)
             {
                 foreach (var childTransform in rootObject.GetComponentsInChildren<Transform>(true))
                 {
-                    var childGameObject = childTransform.gameObject;
-                    var childComponent  = childTransform.GetComponent<T>();
-        
-                    if (childComponent == null)
+                    var gameObject = childTransform.gameObject;
+                    var components = childTransform.GetComponents<Component>();
+
+                    if(components.Length == 0)
                     {
                         continue;
                     }
-        
-                    if (RemoveParentObject)
+
+                    var founds = components.Where(component => component.GetType() == typeof(T));
+
+                    // CAUTION:
+                    // '+1' to account for the Transform component.
+                    if(RemoveEmptyParentObject && components.Length == founds.Count() + 1)
                     {
-                        removeObjects.Add(childGameObject);
+                        removeObjects.Add(gameObject);
                     }
                     else
                     {
-                        removeComponents.Add(childComponent);
+                        removeComponents.AddRange(founds);
                     }
+
+                    // DEBUG:
+                    // Debug.Log(gameObject.name + " : " + founds.Count() + " / " + components.Length);
                 }
             }
-        
-            foreach (var removeObject in removeObjects)
-            {
-                Object.DestroyImmediate(removeObject);
-            }
-        
+
             foreach (var removeComponent in removeComponents)
             {
                 Object.DestroyImmediate(removeComponent);
+            }
+
+            foreach (var removeObject in removeObjects)
+            {
+                Object.DestroyImmediate(removeObject);
             }
         }
     }

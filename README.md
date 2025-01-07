@@ -23,7 +23,7 @@ public abstract class RemoveOnBuild
 
 public abstract class RemoveComponentsOnBuild<T> : RemoveOnBuild
 {
-    protected virtual bool RemoveParentObject { get; } = false;
+    protected virtual bool RemoveEmptyParentObject { get; } = true;
 }
 
 public abstract class RemoveTaggedObjectsOnBuild : RemoveOnBuild
