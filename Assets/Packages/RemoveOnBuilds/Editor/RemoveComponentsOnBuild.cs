@@ -31,11 +31,11 @@ namespace RemoveOnBuilds
                         continue;
                     }
 
-                    var founds = components.Where(component => component.GetType() == typeof(T));
+                    var founds = components.Where(component => component.GetType() == typeof(T)).ToArray();
 
                     // CAUTION:
                     // '+1' to account for the Transform component.
-                    if(RemoveEmptyParentObject && components.Length == founds.Count() + 1)
+                    if(RemoveEmptyParentObject && components.Length == founds.Length + 1 && founds.Length != 0)
                     {
                         removeObjects.Add(gameObject);
                     }
